@@ -4,6 +4,14 @@ Este projeto implementa uma autenticação simples utilizando o Spring Security.
 
 ## Principais Classes
 
+### [SecurityConfigurations](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/config/SecurityConfigurations.java)
+
+A classe `SecurityConfigurations` é responsável pelas principais configurações de segurança da aplicação. Ela define os endpoints que necessitam de autenticação, o encoder para as senhas, os formulários de login etc.
+
+Importante ter as anotações @EnableWebSecurity e @Configuration
+
+Essas anotações são usadas para ativar a segurança web no Spring Security e indicar que é uma classe de configuração e pode conter métodos @Bean ou configurações do Spring.
+
 ### [LoginController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/LoginController.java)
 
 A classe `LoginController` apenas administra a navegação para a página de login. Não é necessário criar um método @PostMapping para login pois isso já é feito de forma automática com as configurações do Spring Security.
@@ -12,14 +20,6 @@ O template [login.html](https://github.com/thomazcm/spring-authentication/blob/m
 
 É possível no entanto [configurar esse processo de forma manual](#login-manual), por exemplo para usar autenticação por Token.
 
-
-### [SecurityConfigurations](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/config/SecurityConfigurations.java)
-
-A classe `SecurityConfigurations` é responsável pelas principais configurações de segurança da aplicação. Ela define os endpoints que necessitam de autenticação, o encoder para as senhas, os formulários de login etc.
-
-Importante ter as anotações @EnableWebSecurity e @Configuration
-
-Essas anotações são usadas para ativar a segurança web no Spring Security e indicar que é uma classe de configuração e pode conter métodos @Bean ou configurações do Spring.
 
 ### [AuthenticationService](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/config/AuthenticationService.java)
 

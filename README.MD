@@ -110,7 +110,7 @@ Para executar este projeto, ajuste as configurações do banco de dados no arqui
 Clone o repositório e navegue até o diretório do projeto:
 
 ```bash
-git clone [link-do-repositorio]
+git clone https://github.com/thomazcm/spring-authentication.git
 cd spring-authentication
 
 ```

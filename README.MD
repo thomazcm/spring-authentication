@@ -23,14 +23,14 @@ Essas anotações são usadas para ativar a segurança web no Spring Security e 
 A classe `AuthenticationService` é um serviço injetado na SecurityConfigurations que implementa a interface `UserDetailsService` do Spring Security. Ela é responsável por fazer a ligação entre o Spring Security e o banco de dados.
 
 
-### [IndexController]([ADD_LINK_HERE](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/IndexController))
+### [IndexController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/IndexController)
 
 A classe `IndexController` é um exemplo de um redirecionamento para uma página inicial após o login bem sucedido (não é preciso especificar redirect pois isso já é feito de forma automática na SecurityConfigurations)
 
 Nela é demonstrado também como user o SecurityContextHolder para obter o atual usuário logado.
 
 ## Navegação
-Foram criados 3 templates simples para [login]() / [cadastro]() / [index]()
+Foram criados 3 templates simples para [login](https://github.com/thomazcm/spring-authentication/blob/master/src/main/resources/templates/login.html) / [cadastro](https://github.com/thomazcm/spring-authentication/blob/master/src/main/resources/templates/cadastro.html) / [index](https://github.com/thomazcm/spring-authentication/blob/master/src/main/resources/templates/index.html)
 
 ## Cadastro de Usuários e Administradores
 O cadastro de novos usuários pode ser feito de duas formas, pelo formulário ou por requisições REST. O cadastro de novos administradores só pode ser feito por requests e apenas por administradores autenticados.
@@ -39,7 +39,7 @@ O cadastro de novos usuários pode ser feito de duas formas, pelo formulário ou
 
 A classe `UserEndpoint` é um exemplo de uma configuração para cadastro de novos usuários e administradores do sistema através de requisições em uma API REST.
 
-### [CadastroController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/endpoint/UserEndpoint.java)
+### [CadastroController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/CadastroController.java)
 
 A classe `CadastroController` adminsitra a view do formulário de cadastro de usuários e faz o cadastro. 
 
@@ -84,3 +84,15 @@ mvn clean install
 mvn spring-boot:run
 ```
 A aplicação estará rodando no endereço http://localhost:8080/
+
+
+## Author
+<b>Thomaz Machado</b>🚀<br />
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/71472870?s=460&u=61b426b901b8fe02e12019b1fdb67bf0072d4f00&v=4" width="100px;" alt=""/><br />
+Project developed by Thomaz Machado. Get in touch!  
+
+[![Linkedin Badge](https://img.shields.io/badge/-Thomaz-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/thomazcm)](https://www.linkedin.com/in/thomazcm) 
+[![Gmail Badge](https://img.shields.io/badge/-thomazcm@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:thomazcm@gmail.com)](mailto:thomazcm@gmail.com)
+ 
+ <p align="right">(<a href="#readme-top">back to top
+</a>)</p>

@@ -76,7 +76,7 @@ Caso seja necessário configurar o login, por exemplo em um endpoint "/auth":
         }
     }
 ```
-Nesse exemplo a autenticação é feita na chamada do método authenticationManager.authenticate(authenticationToken);
+Nesse exemplo a autenticação é feita na chamada do método `authenticationManager.authenticate(authenticationToken)`
 E caso o login falhe é lançada uma AuthenticationException.
 
 Se a autenticação não falhar, nesse caso será gerado um novo token que é retornado na resposta. 

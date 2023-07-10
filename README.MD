@@ -4,11 +4,14 @@ Este projeto implementa uma autenticação simples utilizando o Spring Security.
 
 ## Principais Classes
 
-### [LoginController]([ADD_LINK_HERE](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/IndexController))
+### [LoginController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/LoginController.java)
 
-A classe `IndexController` é um exemplo de um redirecionamento para uma página inicial após o login bem sucedido (não é preciso especificar redirect pois isso já é feito de forma automática na SecurityConfigurations)
+A classe `LoginController` apenas administra a navegação para a página de login. Não é necessário criar um método @PostMapping para login pois isso já é feito de forma automática com as configurações do Spring Security.
 
-Nela é demonstrado também como user o SecurityContextHolder para obter o atual usuário logado.
+O template [login.html](https://github.com/thomazcm/spring-authentication/blob/master/src/main/resources/templates/login.html) possui o formulário que direciona POST para /login com as informações do formulário e a autenticação é feita.
+
+É possível no entanto [configurar esse processo de forma manual](#login-manual), por exemplo para usar autenticação por Token.
+
 
 ### [SecurityConfigurations](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/config/SecurityConfigurations.java)
 
@@ -53,17 +56,40 @@ A classe `User` é uma entidade que representa um usuário na aplicação e impl
 
 A classe `Profile` é uma entidade que representa o perfil de autenticação de um usuário na aplicação. Cada usuário pode ter múltiplos perfis, como "USER" ou "ADMIN". Ela implementa a interface do Spring Security `GrantedAuthority `.
 
+
+### Login Manual
+Caso seja necessário configurar o login, por exemplo em um endpoint "/auth":
+```java
+ @PostMapping("/auth")
+    public ResponseEntity<?> authenticate(@RequestBody LoginForm form, HttpServletResponseresponse) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(form.getEmail(), form.getPassword());
+        try {
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            User user = (User) authentication.getPrincipal();
+            String jwtToken = jwtService.createToken(user);
+            Cookie freshCookie = cookieService.createFreshCookie(jwtToken);
+            response.addCookie(freshCookie);
+            return ResponseEntity.ok(new UserDto(user));
+        } catch (AuthenticationException) {
+            logger.error("authentication failed for user " + form.getEmail()+ System.lineSeparator() + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+```
+Nesse exemplo a autenticação é feita na chamada do método authenticationManager.authenticate(authenticationToken);
+E caso o login falhe é lançada uma AuthenticationException.
+
 ## Principais Dependências
 
-### Spring Security
+#### Spring Security
 
 Spring Security é um framework de autenticação e controle de acesso altamente personalizável. 
 
-### Spring-JPA e PostgreSQL conector
+#### Spring-JPA e PostgreSQL conector
+Banco de dados
 
 ### Thymeleaf
 No projeto foi usado thymeleaf para gerar as páginas simples de login, e de acesso bem sucedido demonstrando a informação do id do usuário no banco de dados.
-
 
 ## Executando o Projeto
 

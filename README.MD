@@ -58,6 +58,7 @@ A classe `Profile` é uma entidade que representa o perfil de autenticação de 
 
 
 ### Login Manual
+O template login.html possui o formulário que direciona POST para /login com as informações do formulário e a autenticação é feita, de forma automática pelo Spring.
 Caso seja necessário configurar o login, por exemplo em um endpoint "/auth":
 ```java
  @PostMapping("/auth")

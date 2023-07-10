@@ -1,4 +1,4 @@
-# Autenticação Simples com Spring Security
+# Autenticação com Spring Security
 
 Este projeto implementa uma autenticação simples utilizando o Spring Security. O objetivo é oferecer uma maneira segura de autenticar usuários no sistema.
 

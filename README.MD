@@ -26,7 +26,7 @@ O template [login.html](https://github.com/thomazcm/spring-authentication/blob/m
 A classe `AuthenticationService` é um serviço injetado na SecurityConfigurations que implementa a interface `UserDetailsService` do Spring Security. Ela é responsável por fazer a ligação entre o Spring Security e o banco de dados.
 
 
-### [IndexController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/IndexController)
+### [IndexController](https://github.com/thomazcm/spring-authentication/blob/master/src/main/java/br/com/businesstec/springauthentication/controller/IndexController.java)
 
 A classe `IndexController` é um exemplo de um redirecionamento para uma página inicial após o login bem sucedido (não é preciso especificar redirect pois isso já é feito de forma automática na SecurityConfigurations)
 

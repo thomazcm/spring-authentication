@@ -61,7 +61,7 @@ A classe `Profile` é uma entidade que representa o perfil de autenticação de 
 Caso seja necessário configurar o login, por exemplo em um endpoint "/auth":
 ```java
  @PostMapping("/auth")
-    public ResponseEntity<?> authenticate(@RequestBody LoginForm form, HttpServletResponseresponse) {
+    public ResponseEntity<?> authenticate(@RequestBody LoginForm form, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(form.getEmail(), form.getPassword());
         try {
             Authentication authentication = authenticationManager.authenticate(authenticationToken);

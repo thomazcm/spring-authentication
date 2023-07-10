@@ -117,7 +117,6 @@ cd spring-authentication
 Agora, você pode construir o projeto e executá-lo:
 
 ```bash
-Copy code
 mvn clean install
 mvn spring-boot:run
 ```

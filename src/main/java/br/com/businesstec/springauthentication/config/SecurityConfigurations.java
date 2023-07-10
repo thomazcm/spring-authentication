@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import br.com.businesstec.springauthentication.repository.UserRepository;
 
@@ -17,6 +16,7 @@ import br.com.businesstec.springauthentication.repository.UserRepository;
 @Configuration
 public class SecurityConfigurations {
 
+    private static final String ADMIN = "ADMIN";
     private final AuthenticationService authenticationService;
 
     public SecurityConfigurations(AuthenticationService authenticationService, UserRepository userRepository) {
@@ -27,14 +27,19 @@ public class SecurityConfigurations {
     public SecurityFilterChain filterChan(HttpSecurity http) throws Exception {
         return http
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/login/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
+                .antMatchers("/login/**", "/login-cadastro", "/logout/**", "/cadastro/**").permitAll() // Requests que podem ser acessadas sem autenticação
+                .antMatchers(HttpMethod.POST, "/users-api").permitAll() // Cadastro de novos usuários
+                .antMatchers(HttpMethod.POST, "/users-api/admin").hasRole(ADMIN) // Cadastro de novos administradores apenas por administradores
                 .anyRequest().authenticated()
-                .and().formLogin(form -> {
-                    form.defaultSuccessUrl("/index", true)
-                    .loginPage("/loginPage")
-                    .failureUrl("/loginPage")
-                    .permitAll();
+                .and().formLogin(form -> { // Configurações do endpoint que o Spring fará o login
+                    form.defaultSuccessUrl("/index", true) // para onde redireciona após logado
+                            .loginPage("/login")
+                            .failureUrl("/login-error")
+                            .permitAll();
+                })
+                .logout(logout -> { // Já configura automaticamente um endpoint que encerra a sessão e redireciona
+                    logout.logoutUrl("/logout")
+                            .logoutSuccessUrl("/login");
                 })
                 .httpBasic()
                 .and().csrf().disable()
@@ -44,16 +49,15 @@ public class SecurityConfigurations {
     public void configureGlobal(AuthenticationManagerBuilder auth, BCryptPasswordEncoder encoder) throws Exception {
         auth.userDetailsService(authenticationService).passwordEncoder(encoder);
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
 
 }
